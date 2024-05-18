@@ -104,7 +104,7 @@ int Test(){
         return -1;
     }
     // Add more test cases for diagnal win
-    
+
 
 
     return 1;
@@ -121,5 +121,6 @@ int main() {
     } else {
         printf("Tests failed\n");
     }
+    gameController();
    return 0;
 }
