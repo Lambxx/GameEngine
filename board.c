@@ -65,14 +65,14 @@ int checkWin(int board[7][6], int player){
         for(int row = 0; row < 6; row++){
             if(board[col][row] == player){
                 // Check diagonal right
-                if(col + 2 < 7 && row + 2 < 6){
-                    if(board[col ][row] == player && board[col + 1][row + 1] == player && board[col + 2][row + 2] == player){
+                if(col + 3 < 7 && row + 2 < 6){
+                    if(board[col+1 ][row+1] == player && board[col + 2][row + 2] == player && board[col + 3][row + 3] == player){
                         return player;
                     }
                 }
                 // Check diagonal left
-                if(col - 2 >= 0 && row + 2 < 6){
-                    if(board[col ][row ] == player && board[col - 1][row + 1] == player && board[col - 2][row + 2] == player){
+                if(col - 3 >= 0 && row + 3 < 6){
+                    if(board[col -1 ][row +1] == player && board[col - 2][row + 2] == player && board[col - 3][row + 3] == player){
                         return player;
                     }
                 }
