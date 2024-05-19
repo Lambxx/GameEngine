@@ -146,7 +146,7 @@ int evaluateAI(int board[7][6], int AIplayer){
 int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
 
 // EVALUATE THE BOARD
-    int score = evaluate(board, playerTurn);
+    int score = evaluate(board, playerTurn) - evaluate(board, 3 - playerTurn);
   
    // BASE CASE
   if (depth == 0 || checkWin(board, 1) == 1 || checkWin(board, 2) == 2 || noMovesLeft(board)){
@@ -161,7 +161,7 @@ int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
 
     // Maximizing player case
     if(maximizingPlayer){
-       int maxScore = -9999;
+       int maxScore = -99999;
         for (int i = 0; i<7;i++){
             if(validMove(board, i)){
                 int newBoard[7][6];
@@ -179,7 +179,7 @@ int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
         }
         return maxScore;
     }  else {
-        int minScore = 9999;
+        int minScore = 99999;
         for (int i = 0; i<7;i++){
             if(validMove(board, i)){
                 int newBoard[7][6];

@@ -160,7 +160,7 @@ void gameWithAi(){
     int m_board[7][6] = {0};
     int player = 1;
     int AIplayer = 2;
-    int depth = 4;
+    int depth = 6;
     printBoard(m_board);
     while(true){
         int col = 0;
