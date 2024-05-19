@@ -8,4 +8,5 @@ void addPiece(int board[7][6], int column, int player);
 int checkWin(int board[7][6], int player);
 bool validMove(int board[7][6], int column);
 void getValidMoves(int board[7][6], int validMoves[7]);
+bool noMovesLeft(int board[7][6]);
 #endif

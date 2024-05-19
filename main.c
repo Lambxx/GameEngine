@@ -156,6 +156,53 @@ int Test(){
     // TBC .. 
 }
 
+void gameWithAi(){
+    int m_board[7][6] = {0};
+    int player = 1;
+    int AIplayer = 2;
+    int depth = 4;
+    printBoard(m_board);
+    while(true){
+        int col = 0;
+        if(player == 1){
+            printf("Player %d enter a column: ", player);
+            scanf("%d", &col);
+            addPiece(m_board, col, player);
+            printBoard(m_board);
+            int winner = checkWin(m_board, player);
+            if(winner != -1){
+                printf("Player %d wins\n", player);
+                break;
+            }
+            player = 2;
+        } else {
+            col = bestMove(m_board, depth, AIplayer);
+            addPiece(m_board, col, AIplayer);
+            printBoard(m_board);
+            int winner = checkWin(m_board, AIplayer);
+            if(winner != -1){
+                printf("Player %d wins\n", AIplayer);
+                break;
+            }
+            player = 1;
+        }
+    }
+
+}
+
+void menu(){
+    printf("Enter 1 to play with AI\n");
+    printf("Enter 2 to play with another player\n");
+    int choice = 0;
+    scanf("%d", &choice);
+    if(choice == 1){
+        gameWithAi();
+    } else {
+        gameController();
+    }
+}
+
+
 int main() {
    // printf() displays the string inside quotation
    // 7 columns and 6 rows all 0

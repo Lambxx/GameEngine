@@ -198,10 +198,77 @@ int evaluateAI(int board[7][6], int AIplayer){
     }
 }
 
-int minimax(int board[7][6], int depth, int playerTurn,int maximizingPlayer){
+int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
+
+// EVALUATE THE BOARD
     int score = evaluateAI(board, maximizingPlayer);
-    if (depth == 0 || checkWin(board, 1) == 1 || checkWin(board, 2) == 2){
+  
+   // BASE CASE
+  if (depth == 0 || checkWin(board, 1) == 1 || checkWin(board, 2) == 2 || noMovesLeft(board)){
         return score;
     }
-    
+     int otherPlayer;
+    if(playerTurn == 1){
+        otherPlayer = 2;
+    } else {
+        otherPlayer = 1;
+    }
+    // Maximizing player case
+    if(maximizingPlayer){
+       int maxScore = -9999;
+        for (int i = 0; i<7;i++){
+            if(validMove(board, i)){
+                int newBoard[7][6];
+                for(int j = 0; j < 7; j++){
+                    for(int k = 0; k < 6; k++){
+                        newBoard[j][k] = board[j][k];
+                    }
+                }
+                addPiece(newBoard, i, playerTurn);
+                int newScore = minimax(newBoard, depth - 1, otherPlayer, false);
+                if(newScore > maxScore){
+                    maxScore = newScore;
+                }
+            }
+        }
+    }  else {
+        int minScore = 9999;
+        for (int i = 0; i<7;i++){
+            if(validMove(board, i)){
+                int newBoard[7][6];
+                for(int j = 0; j < 7; j++){
+                    for(int k = 0; k < 6; k++){
+                        newBoard[j][k] = board[j][k];
+                    }
+                }
+                addPiece(newBoard, i, playerTurn);
+                int newScore = minimax(newBoard, depth - 1, otherPlayer, true);
+                if(newScore < minScore){
+                    minScore = newScore;
+                }
+            }
+        }
+    }
+
+}
+
+int bestMove(int board[7][6], int depth, int player){
+    int bestVal = -10000;
+    int bestMove = -1;
+    for (int i = 0; i<7;i++){
+        if(validMove(board, i)){
+            int newBoard[7][6];
+            for(int j = 0; j < 7; j++){
+                for(int k = 0; k < 6; k++){
+                    newBoard[j][k] = board[j][k];
+                }
+            }
+            addPiece(newBoard, i, player);
+            int moveVal = minimax(newBoard, depth, player, false);
+            if(moveVal > bestVal){
+                bestMove = i;
+                bestVal = moveVal;
+            }
+        }
+    }
 }

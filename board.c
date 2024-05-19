@@ -102,6 +102,15 @@ void getValidMoves(int board[7][6], int validMoves[7]){
         }
     }
 }
+
+bool noMovesLeft(int board[7][6]){
+    for(int i = 0; i < 7; i++){
+        if(validMove(board, i)){
+            return false;
+        }
+    }
+    return true;
+}
     
 
     
