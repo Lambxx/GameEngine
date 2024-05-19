@@ -1,6 +1,9 @@
 // Hello world program
 #include <stdio.h>
 #include "board.h" 
+#include <stdbool.h>
+#include <stdlib.h>
+#include "gamePlayer.h"
 
 
 void gameController(){
@@ -105,10 +108,52 @@ int Test(){
     }
     // Add more test cases for diagnal win
 
+     // Test valid move
+    int validMoves[7] = {0};
+    int valBoard[7][6] = {0};
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 0, 1);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 3, 2);
+    addPiece(valBoard, 5, 2);
+    addPiece(valBoard, 5, 2);
+    getValidMoves(valBoard, validMoves);
+    if(validMoves[0] == 0 && validMoves[1] == 1 && validMoves[2] == 1 && validMoves[3] == 0 && validMoves[4] == 1 && validMoves[5] == 1 && validMoves[6] == 1){
+        printf("Test 5 valid move Passed\n");
+        
+    } else {
+        printf("Test 5 valid move Failed\n");
+        return -1;
+    }
 
+    // Test evaluate
+    int evalBoard[7][6] = {0};
+    addPiece(evalBoard, 0, 1);
+    addPiece(evalBoard, 1, 1);
+    addPiece(evalBoard, 2, 1);
+    addPiece(evalBoard, 3, 1);
+    int score = evaluate(evalBoard, 1);
+    if(score == 9999){
+        printf("Test 6 evaluate Passed\n");
+        
+    } else {
+        printf("Test 6 evaluate Failed\n");
+        return -1;
+    }
 
+    
     return 1;
 
+    // Tests for other scores in evaluate
+    // TBC .. 
 }
 
 int main() {
@@ -121,6 +166,6 @@ int main() {
     } else {
         printf("Tests failed\n");
     }
-    gameController();
+   // gameController();
    return 0;
 }

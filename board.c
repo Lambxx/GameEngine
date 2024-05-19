@@ -82,6 +82,26 @@ int checkWin(int board[7][6], int player){
     return -1;
 }
 
+// Function to check if a move is valid
+bool validMove(int board[7][6], int column){
+    for(int row = 0; row < 6; row++){
+        if(board[column][row] == 0){
+            return true;
+        }
+    }
+    return false;
+}
+
+// Function to get the valid moves
+void getValidMoves(int board[7][6], int validMoves[7]){
+    for(int i = 0; i < 7; i++){
+        if(validMove(board, i)){
+            validMoves[i] = 1;
+        } else {
+            validMoves[i] = 0;
+        }
+    }
+}
     
 
     
