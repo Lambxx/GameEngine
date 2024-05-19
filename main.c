@@ -214,5 +214,6 @@ int main() {
         printf("Tests failed\n");
     }
    // gameController();
+   menu();
    return 0;
 }

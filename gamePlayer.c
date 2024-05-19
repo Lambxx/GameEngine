@@ -201,7 +201,7 @@ int evaluateAI(int board[7][6], int AIplayer){
 int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
 
 // EVALUATE THE BOARD
-    int score = evaluateAI(board, maximizingPlayer);
+    int score = evaluate(board, playerTurn);
   
    // BASE CASE
   if (depth == 0 || checkWin(board, 1) == 1 || checkWin(board, 2) == 2 || noMovesLeft(board)){
@@ -213,6 +213,7 @@ int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
     } else {
         otherPlayer = 1;
     }
+
     // Maximizing player case
     if(maximizingPlayer){
        int maxScore = -9999;
@@ -231,6 +232,7 @@ int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
                 }
             }
         }
+        return maxScore;
     }  else {
         int minScore = 9999;
         for (int i = 0; i<7;i++){
@@ -248,13 +250,14 @@ int minimax(int board[7][6], int depth, int playerTurn,bool maximizingPlayer){
                 }
             }
         }
+        return minScore;
     }
 
 }
 
 int bestMove(int board[7][6], int depth, int player){
     int bestVal = -10000;
-    int bestMove = -1;
+    int bestMove = 0;
     for (int i = 0; i<7;i++){
         if(validMove(board, i)){
             int newBoard[7][6];
@@ -264,11 +267,12 @@ int bestMove(int board[7][6], int depth, int player){
                 }
             }
             addPiece(newBoard, i, player);
-            int moveVal = minimax(newBoard, depth, player, false);
+            int moveVal = minimax(newBoard, depth, player, true);
             if(moveVal > bestVal){
                 bestMove = i;
                 bestVal = moveVal;
             }
         }
     }
+    return bestMove;
 }
