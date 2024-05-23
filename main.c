@@ -158,34 +158,37 @@ int Test(){
 
 void gameWithAi(){
     int m_board[7][6] = {0};
-    int player = 1;
-    int AIplayer = 2;
-    int depth = 6;
+    int playerG = 2;
+    int AIplayerG = 1;
+    int depth = 4;
     printBoard(m_board);
     while(true){
         int col = 0;
-        if(player == 1){
-            printf("Player %d enter a column: ", player);
-            scanf("%d", &col);
-            addPiece(m_board, col, player);
+        
+             col = bestMove(m_board, depth, AIplayerG);
+            addPiece(m_board, col, AIplayerG);
             printBoard(m_board);
-            int winner = checkWin(m_board, player);
+            int winner = checkWin(m_board, AIplayerG);
             if(winner != -1){
-                printf("Player %d wins\n", player);
+                printf("Player %d wins\n", AIplayerG);
                 break;
-            }
-            player = 2;
-        } else {
-            col = bestMove(m_board, depth, AIplayer);
-            addPiece(m_board, col, AIplayer);
-            printBoard(m_board);
-            int winner = checkWin(m_board, AIplayer);
-            if(winner != -1){
-                printf("Player %d wins\n", AIplayer);
-                break;
-            }
-            player = 1;
+            
+           
         }
+            printf("Player %d enter a column: ", playerG);
+            scanf("%d", &col);
+            addPiece(m_board, col, playerG);
+            printBoard(m_board);
+            col = bestMove(m_board, depth, playerG);
+             winner = checkWin(m_board, playerG);
+            if(winner != -1){
+                printf("Player %d wins\n", playerG);
+                break;
+            }
+            
+        
+            // Error here board beigng passed as empty 
+          
     }
 
 }
